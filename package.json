@@ -1,0 +1,13 @@
+{
+	"name": "lcep-storyblok-component",
+	"version": "1.0.0",
+	"main": "src/index.tsx",
+	"module": "src/index.tsx",
+	"peerDependencies": {
+	  "react": "^16.8.0",
+	  "react-dom": "^16.8.0"
+	},
+	"scripts": {
+	  "build": "echo 'not needed'"
+	}
+}
