@@ -1,6 +1,4 @@
-/// <reference lib="dom" />
-
-import React from 'react';
+import * as React from 'react';
 
 type SBProps = {
   slot?: 'top' | 'bottom';
@@ -103,7 +101,7 @@ type SBProps = {
   };
 }
 
-const SBcomponent = ({ slot = 'top', story }: SBProps): React.ReactElement => {
+export const SBcomponent = ({ slot = 'top', story }: SBProps): React.ReactElement => {
   if (!story) {
     return <div><span>Loading...</span></div>;
   }
@@ -121,5 +119,3 @@ const SBcomponent = ({ slot = 'top', story }: SBProps): React.ReactElement => {
     </div>
   );
 }
-
-export default SBcomponent;
