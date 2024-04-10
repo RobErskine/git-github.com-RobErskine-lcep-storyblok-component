@@ -1,3 +1,5 @@
+/// <reference lib="dom" />
+
 import React from 'react';
 
 enum Slot {
@@ -106,25 +108,23 @@ type SBProps = {
 	};
 }
 
-const SBcomponent = ({slot, story}): SBProps => {
+const SBcomponent = ({ slot, story }: SBProps): React.ReactNode => {
 	if (!story) {
-		return (
-			<div><span>Loading...</span></div>
-		)
+	  return <div><span>Loading...</span></div>;
 	}
-
+  
 	let slotContent = story.content.bottomSlot;
 	if (slot === Slot.Top) {
-		slotContent = story.content.topSlot;
+	  slotContent = story.content.topSlot;
 	}
-
+  
 	slotContent.replace('\n\n', '<br />');
-
+  
 	return (
-		<div>
-			<p>{slotContent}</p>
-		</div>
-	)
+	  <div>
+		<p>{slotContent}</p>
+	  </div>
+	);
 }
 
 export default SBcomponent
