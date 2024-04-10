@@ -2,13 +2,9 @@
 
 import React from 'react';
 
-enum Slot {
-	Top = 'top',
-	Bottom = 'bottom',
-}
 
 type SBProps = {
-	slot: Slot;
+	slot?: 'top' | 'bottom';
 	story: {
 		name: string;
 		created_at: string;
@@ -108,13 +104,13 @@ type SBProps = {
 	};
 }
 
-const SBcomponent = ({ slot, story }: SBProps): React.ReactNode => {
+const SBcomponent = ({ slot = 'top', story }: SBProps): React.ReactNode => {
 	if (!story) {
 	  return <div><span>Loading...</span></div>;
 	}
   
 	let slotContent = story.content.bottomSlot;
-	if (slot === Slot.Top) {
+	if (slot === 'top') {
 	  slotContent = story.content.topSlot;
 	}
   
