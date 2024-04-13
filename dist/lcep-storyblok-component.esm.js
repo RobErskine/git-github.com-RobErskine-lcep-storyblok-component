@@ -1,6 +1,10 @@
 import { createElement } from 'react';
-import { renderRichText } from '@storyblok/react';
+import { renderRichText, storyblokInit, apiPlugin } from '@storyblok/react';
 
+storyblokInit({
+  accessToken: "xxx",
+  use: [apiPlugin]
+});
 var index = (function (_ref) {
   var _ref$slot = _ref.slot,
     slot = _ref$slot === void 0 ? 'top' : _ref$slot,

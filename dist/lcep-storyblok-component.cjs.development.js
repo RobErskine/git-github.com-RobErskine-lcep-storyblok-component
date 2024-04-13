@@ -5,6 +5,10 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var React = require('react');
 var react = require('@storyblok/react');
 
+react.storyblokInit({
+  accessToken: "xxx",
+  use: [react.apiPlugin]
+});
 var index = (function (_ref) {
   var _ref$slot = _ref.slot,
     slot = _ref$slot === void 0 ? 'top' : _ref$slot,

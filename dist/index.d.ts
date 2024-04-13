@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ISbRichtext } from '@storyblok/react';
+import { ISbRichtext } from "@storyblok/react";
 declare type SBProps = {
     slot?: 'top' | 'bottom' | 'promotion' | 'video';
     story: {
@@ -15,8 +15,8 @@ declare type SBProps = {
             promotionLink: {
                 id: string;
                 url: string;
-                linkType: string;
-                fieldType: string;
+                linktype: string;
+                fieldtype: string;
                 cached_url: string;
             };
             showPromotion: boolean;

@@ -1,6 +1,10 @@
 import * as React from 'react';
-import { renderRichText } from "@storyblok/react";
-import { ISbRichtext } from '@storyblok/react';
+import { renderRichText, storyblokInit, apiPlugin, ISbRichtext } from "@storyblok/react";
+
+storyblokInit({
+  accessToken: "xxx", // access token not needed for this demo
+  use: [apiPlugin]
+});
 
 /*
 Create video showing how to use the SB component
