@@ -25,8 +25,8 @@ type SBProps = {
       promotionLink: {
         id: string;
         url: string;
-        linkType: string;
-        fieldType: string;
+        linktype: string;
+        fieldtype: string;
         cached_url: string;
       };
       showPromotion: boolean;
