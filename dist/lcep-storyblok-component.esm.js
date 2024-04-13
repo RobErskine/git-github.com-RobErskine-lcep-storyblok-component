@@ -2,7 +2,10 @@ import { createElement } from 'react';
 import { renderRichText, storyblokInit, apiPlugin } from '@storyblok/react';
 
 storyblokInit({
-  accessToken: "xxx",
+  accessToken: "osl4HoQDQfrBYAqRA1nfrQtt",
+  apiOptions: {
+    region: "us"
+  },
   use: [apiPlugin]
 });
 var index = (function (_ref) {

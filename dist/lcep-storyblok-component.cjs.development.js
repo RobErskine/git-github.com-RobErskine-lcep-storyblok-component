@@ -6,7 +6,10 @@ var React = require('react');
 var react = require('@storyblok/react');
 
 react.storyblokInit({
-  accessToken: "xxx",
+  accessToken: "osl4HoQDQfrBYAqRA1nfrQtt",
+  apiOptions: {
+    region: "us"
+  },
   use: [react.apiPlugin]
 });
 var index = (function (_ref) {

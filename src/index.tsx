@@ -2,7 +2,10 @@ import * as React from 'react';
 import { renderRichText, storyblokInit, apiPlugin, ISbRichtext } from "@storyblok/react";
 
 storyblokInit({
-  accessToken: "xxx", // access token not needed for this demo
+  accessToken: "osl4HoQDQfrBYAqRA1nfrQtt", // throwaway token
+  apiOptions: {
+    region: "us",
+  },
   use: [apiPlugin]
 });
 
