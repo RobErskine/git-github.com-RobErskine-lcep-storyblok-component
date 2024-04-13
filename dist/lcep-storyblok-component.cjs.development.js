@@ -11,10 +11,14 @@ function renderRichText(richText) {
   }
   richText.content.forEach(function (item) {
     if (item.type === 'heading') {
-      var level = item.attrs.level;
-      html += "<h" + level + ">" + item.content[0].text + "</h" + level + ">";
+      var _item$attrs, _item$content;
+      var level = (_item$attrs = item.attrs) == null ? void 0 : _item$attrs.level;
+      var contentText = (_item$content = item.content) == null || (_item$content = _item$content[0]) == null ? void 0 : _item$content.text;
+      if (level && contentText) {
+        html += "<h" + level + ">" + contentText + "</h" + level + ">";
+      }
     } else if (item.type === 'paragraph') {
-      if (item.content.length > 0) {
+      if (item.content) {
         html += '<p>';
         item.content.forEach(function (contentItem) {
           var text = contentItem.text;

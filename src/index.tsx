@@ -176,7 +176,6 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
   }
 
   const styles = `
-    /* Video Component */
     .lcep-video {
       display: block;
       width: 100%;
@@ -206,8 +205,6 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
       height: 100%;
     }
 
-
-    /* Promotion Component */
     .lcep-promotion {
       display: flex;
       flex-direction: column;
@@ -263,16 +260,18 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
   // top slot
   if (slot === 'top') {
     return (
-      <div dangerouslySetInnerHTML={{ __html: renderRichText(story.content.topSlot)}}>
+      <div>
         <style>{styles}</style>
+        <div dangerouslySetInnerHTML={{ __html: renderRichText(story.content.topSlot)}}></div>
       </div>
     ) 
   }
   // bottom slot
   else if (slot === 'bottom') {
     return (
-      <div dangerouslySetInnerHTML={{ __html: renderRichText(story.content.bottomSlot)}}>
+      <div>
         <style>{styles}</style>
+        <div dangerouslySetInnerHTML={{ __html: renderRichText(story.content.bottomSlot)}}></div>
       </div>
     )
   }
