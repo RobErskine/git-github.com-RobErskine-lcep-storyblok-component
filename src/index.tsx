@@ -139,22 +139,95 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
     return <div><span>Loading...</span></div>;
   }
 
+  const styles = `
+    /* Video Component */
+    .lcep-video {
+      display: block;
+      width: 100%;
+      max-width: 960px;
+      margin:0 auto;
+      padding:2rem 1rem;
+      position: relative;
+    }
+
+    .lcep-video:after {
+      content: '';
+      display: block;
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .lcep-video video {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+
+      bottom: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+    }
+
+
+    /* Promotion Component */
+    .lcep-promotion {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      width: 100%;
+      max-width: 200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      position: relative;
+      z-index: 1;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+    }
+
+    .lcep-promotion:after{
+      display: block;
+      content: '';
+      z-index: 2;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      background-color: rgba(0,0,0,0.5);
+    }
+  `;
+
   const topSlotContent = renderRichText(story.content.topSlot);
   const promotionContent = renderRichText(story.content.promotionContent);
   const bottomSlotContent = renderRichText(story.content.bottomSlot);
 
   // top slot
   if (slot === 'top') {
-    return (<div>{topSlotContent}</div>) 
+    return (
+      <div>
+        <style>{styles}</style>
+        {topSlotContent}
+      </div>
+    ) 
   }
   // bottom slot
   else if (slot === 'bottom') {
-    return (<div>{bottomSlotContent}</div>)
+    return (
+      <div>
+        <style>{styles}</style>
+        {bottomSlotContent}
+      </div>
+    )
   }
   // video slot
   else if (slot === 'video') {
     return (
       <div className="lcep-video">
+        <style>{styles}</style>
         <video controls>
           <source src={story.content.productVideos[0].source} type="video/mp4" />
         </video>
@@ -165,6 +238,7 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
   else if (slot === 'promotion' && story.content.showPromotion === true) {
     return (
       <div className="lcep-promotion" style={{backgroundImage: `url(${story.content?.promotionImage.filename})`}}>
+        <style>{styles}</style>
         {promotionContent}
         <a href={story.content.promotionLink.url}>
           Learn more
