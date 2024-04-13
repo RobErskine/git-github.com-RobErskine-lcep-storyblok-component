@@ -2,25 +2,32 @@ import { createElement } from 'react';
 
 function renderRichText(richText) {
   var html = '';
+  if (!richText) {
+    return html;
+  }
   richText.content.forEach(function (item) {
     if (item.type === 'heading') {
       var level = item.attrs.level;
       html += "<h" + level + ">" + item.content[0].text + "</h" + level + ">";
     } else if (item.type === 'paragraph') {
-      html += '<p>';
-      item.content.forEach(function (contentItem) {
-        var text = contentItem.text;
-        if (contentItem.marks) {
-          contentItem.marks.forEach(function (mark) {
-            if (mark.type === 'bold') {
-              text = "<b>" + text + "</b>";
-            }
-            // Add other mark types if needed (italic, underline, etc.)
-          });
-        }
-        html += text;
-      });
-      html += '</p>';
+      if (item.content.length > 0) {
+        html += '<p>';
+        item.content.forEach(function (contentItem) {
+          var text = contentItem.text;
+          if (contentItem.marks) {
+            contentItem.marks.forEach(function (mark) {
+              if (mark.type === 'bold') {
+                text = "<b>" + text + "</b>";
+              }
+              // Add other mark types if needed (italic, underline, etc.)
+            });
+          }
+          html += text;
+        });
+        html += '</p>';
+      }
+    } else {
+      console.log('Unknown type: ', item.type);
     }
   });
   return html;

@@ -135,11 +135,16 @@ type SBProps = {
 function renderRichText(richText: any) {
   let html = '';
 
+  if (!richText) {
+    return html;
+  }
+
   richText.content.forEach((item: any) => {
       if (item.type === 'heading') {
           const level = item.attrs.level;
           html += `<h${level}>${item.content[0].text}</h${level}>`;
       } else if (item.type === 'paragraph') {
+        if (item.content.length > 0) {
           html += '<p>';
           item.content.forEach((contentItem: any) => {
               let text = contentItem.text;
@@ -153,7 +158,10 @@ function renderRichText(richText: any) {
               }
               html += text;
           });
-          html += '</p>'; 
+          html += '</p>';
+        }
+      } else {
+          console.log('Unknown type: ', item.type);
       }
   });
 
