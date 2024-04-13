@@ -1,0 +1,59 @@
+/* Video Component */
+.lcep-video {
+	display: block;
+	width: 100%;
+	max-width: 960px;
+	margin:0 auto;
+	padding:2rem 1rem;
+	position: relative;
+}
+
+.lcep-video:after {
+	content: '';
+	display: block;
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+}
+
+.lcep-video video {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+
+/* Promotion Component */
+.lcep-promotion {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	width: 100%;
+	max-width: 200px;
+	margin: 0 auto;
+	padding: 2rem 1rem;
+	position: relative;
+	z-index: 1;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	color: #fff;
+}
+
+.lcep-promotion:after{
+	display: block;
+	content: '';
+	z-index: 2;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	background-color: rgba(0,0,0,0.5);
+}

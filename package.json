@@ -4,34 +4,34 @@
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
 	"files": [
-	  "dist",
-	  "src"
+		"dist",
+		"src"
 	],
 	"engines": {
-	  "node": ">=10"
+		"node": ">=10"
 	},
 	"scripts": {
-	  "start": "tsdx watch",
-	  "build": "tsdx build",
-	  "test": "tsdx test --passWithNoTests",
-	  "lint": "tsdx lint",
-	  "prepare": "tsdx build",
-	  "size": "size-limit",
-	  "analyze": "size-limit --why"
+		"start": "tsdx watch",
+		"build": "tsdx build",
+		"test": "tsdx test --passWithNoTests",
+		"lint": "tsdx lint",
+		"prepare": "tsdx build",
+		"size": "size-limit",
+		"analyze": "size-limit --why"
 	},
 	"peerDependencies": {
-	  "react": ">=16"
+		"react": ">=16"
 	},
 	"husky": {
-	  "hooks": {
-		"pre-commit": "tsdx lint"
-	  }
+		"hooks": {
+			"pre-commit": "tsdx lint"
+		}
 	},
 	"prettier": {
-	  "printWidth": 80,
-	  "semi": true,
-	  "singleQuote": true,
-	  "trailingComma": "es5"
+		"printWidth": 80,
+		"semi": true,
+		"singleQuote": true,
+		"trailingComma": "es5"
 	},
 	"name": "lcep-storyblok-component",
 	"author": {
@@ -40,25 +40,26 @@
 	},
 	"module": "dist/lcep-storyblok-component.esm.js",
 	"size-limit": [
-	  {
-		"path": "dist/lcep-storyblok-component.cjs.production.min.js",
-		"limit": "10 KB"
-	  },
-	  {
-		"path": "dist/lcep-storyblok-component.esm.js",
-		"limit": "10 KB"
-	  }
+		{
+			"path": "dist/lcep-storyblok-component.cjs.production.min.js",
+			"limit": "10 KB"
+		},
+		{
+			"path": "dist/lcep-storyblok-component.esm.js",
+			"limit": "10 KB"
+		}
 	],
 	"devDependencies": {
-	  "@size-limit/preset-small-lib": "^11.1.2",
-	  "@types/react": "^18.2.75",
-	  "@types/react-dom": "^18.2.24",
-	  "husky": "^9.0.11",
-	  "react": "^18.2.0",
-	  "react-dom": "^18.2.0",
-	  "size-limit": "^11.1.2",
-	  "tsdx": "^0.14.1",
-	  "tslib": "^2.6.2",
-	  "typescript": "^3.9.10"
+		"@size-limit/preset-small-lib": "^11.1.2",
+		"@storyblok/react": "^3.0.9",
+		"@types/react": "^18.2.75",
+		"@types/react-dom": "^18.2.24",
+		"husky": "^9.0.11",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"size-limit": "^11.1.2",
+		"tsdx": "^0.14.1",
+		"tslib": "^2.6.2",
+		"typescript": "^3.9.10"
 	}
-  }
+}

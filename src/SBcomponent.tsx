@@ -1,7 +1,17 @@
 import * as React from 'react';
+import { renderRichText } from "@storyblok/react";
+import { ISbRichtext } from '@storyblok/react';
+
+/*
+Create video showing how to use the SB component
+top: text
+bottom: richText
+promotion: text / image / link
+video: mp4
+*/
 
 type SBProps = {
-  slot?: 'top' | 'bottom';
+  slot?: 'top' | 'bottom' | 'promotion' | 'video';
   story: {
     name: string;
     created_at: string;
@@ -11,10 +21,33 @@ type SBProps = {
     content: {
       _uid: string;
       network: string[];
+      promotionContent: ISbRichtext;
+      promotionLink: {
+        id: string;
+        url: string;
+        linkType: string;
+        fieldType: string;
+        cached_url: string;
+      };
+      showPromotion: boolean;
+      promotionImage: {
+        id: number;
+        alt: string;
+        name: string;
+        focus: string;
+        title: string;
+        source: string;
+        filename: string;
+        copyright: string;
+        fieldtype: string;
+        meta_data: Record<string, any>;
+        is_private: boolean;
+        is_external_url: boolean;
+    };    
       subType: string;
-      topSlot: string;
+      topSlot: ISbRichtext;
       component: string;
-      bottomSlot: string;
+      bottomSlot: ISbRichtext;
       defaultSKU: string;
       familyCode: string;
       familyName: string;
@@ -106,16 +139,40 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
     return <div><span>Loading...</span></div>;
   }
 
-  let slotContent = story.content.bottomSlot;
+  const topSlotContent = renderRichText(story.content.topSlot);
+  const promotionContent = renderRichText(story.content.promotionContent);
+  const bottomSlotContent = renderRichText(story.content.bottomSlot);
+
+  // top slot
   if (slot === 'top') {
-    slotContent = story.content.topSlot;
+    return (<div>{topSlotContent}</div>) 
   }
-
-  slotContent = slotContent.replace(/\n\n/g, '<br />');
-
-  return (
-    <div>
-      <p dangerouslySetInnerHTML={{ __html: slotContent }} />
-    </div>
-  );
+  // bottom slot
+  else if (slot === 'bottom') {
+    return (<div>{bottomSlotContent}</div>)
+  }
+  // video slot
+  else if (slot === 'video') {
+    return (
+      <div className="lcep-video">
+        <video controls>
+          <source src={story.content.productVideos[0].source} type="video/mp4" />
+        </video>
+      </div>
+    )
+  }
+  // promotion slot
+  else if (slot === 'promotion' && story.content.showPromotion === true) {
+    return (
+      <div className="lcep-promotion" style={{backgroundImage: `url(${story.content?.promotionImage.filename})`}}>
+        {promotionContent}
+        <a href={story.content.promotionLink.url}>
+          Learn more
+        </a>
+      </div>
+    );
+  // slot not found
+  } else {
+    return (<div><p>Slot not configured.</p></div>)
+  }
 }
