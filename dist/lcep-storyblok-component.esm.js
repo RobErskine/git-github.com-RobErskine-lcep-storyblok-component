@@ -40,14 +40,11 @@ var index = (function (_ref) {
     return createElement("div", null, createElement("span", null, "Loading..."));
   }
   var styles = "\n    /* Video Component */\n    .lcep-video {\n      display: block;\n      width: 100%;\n      max-width: 960px;\n      margin:0 auto;\n      padding:2rem 1rem;\n      position: relative;\n    }\n\n    .lcep-video:after {\n      content: '';\n      display: block;\n      position: relative;\n      padding-bottom: 56.25%;\n      height: 0;\n      overflow: hidden;\n    }\n\n    .lcep-video video {\n      position: absolute;\n      top: 0px;\n      right: 0px;\n\n      bottom: 0px;\n      left: 0px;\n      width: 100%;\n      height: 100%;\n    }\n\n\n    /* Promotion Component */\n    .lcep-promotion {\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n      justify-content: center;\n      width: 100%;\n      height:400px;\n      max-width: 200px;\n      margin: 0 auto;\n      padding: 2rem 1rem;\n      position: relative;\n      z-index: 1;\n      background-size: cover;\n      background-position: center;\n      background-repeat: no-repeat;\n      color: #fff;\n      border-radius: 12px;\n      overflow: hidden;\n    }\n\n    .lcep-promotion:after{\n      display: block;\n      content: '';\n      z-index: 2;\n      position: absolute;\n      top: 0px;\n      right: 0px;\n      bottom: 0px;\n      left: 0px;\n      background-color: rgba(0,0,0,0.5);\n    }\n\n    .lcep-promotion a,\n    .lcep-promotion span {\n      position: relative;\n      z-index: 3;\n      display: block;\n      width: 100%;\n      padding: 15px;\n    }\n\n    .lcep-promotion a {\n      background-color: #fff;\n      color: #000;\n      text-align: center;\n      text-decoration: none;\n      border-radius: 12px;\n      margin-top: 1rem;\n      padding: 1rem;\n    }\n  ";
-  var topSlotContent = renderRichText(story.content.topSlot);
-  var promotionContent = renderRichText(story.content.promotionContent);
-  var bottomSlotContent = renderRichText(story.content.bottomSlot);
   // top slot
   if (slot === 'top') {
     return createElement("div", {
       dangerouslySetInnerHTML: {
-        __html: topSlotContent
+        __html: renderRichText(story.content.topSlot)
       }
     }, createElement("style", null, styles));
   }
@@ -55,7 +52,7 @@ var index = (function (_ref) {
   else if (slot === 'bottom') {
     return createElement("div", {
       dangerouslySetInnerHTML: {
-        __html: bottomSlotContent
+        __html: renderRichText(story.content.bottomSlot)
       }
     }, createElement("style", null, styles));
   }
@@ -80,7 +77,7 @@ var index = (function (_ref) {
       }
     }, createElement("style", null, styles), createElement("span", {
       dangerouslySetInnerHTML: {
-        __html: promotionContent
+        __html: renderRichText(story.content.promotionContent)
       }
     }), createElement("a", {
       href: story.content.promotionLink.url

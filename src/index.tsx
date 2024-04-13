@@ -136,30 +136,33 @@ function renderRichText(richText: any) {
   let html = '';
 
   if (!richText) {
-    return html;
+      return html;
   }
 
   richText.content.forEach((item: any) => {
       if (item.type === 'heading') {
-          const level = item.attrs.level;
-          html += `<h${level}>${item.content[0].text}</h${level}>`;
+          const level = item.attrs?.level;
+          const contentText = item.content?.[0]?.text;
+          if (level && contentText) {
+              html += `<h${level}>${contentText}</h${level}>`;
+          }
       } else if (item.type === 'paragraph') {
-        if (item.content.length > 0) {
-          html += '<p>';
-          item.content.forEach((contentItem: any) => {
-              let text = contentItem.text;
-              if (contentItem.marks) {
-                  contentItem.marks.forEach((mark: any) => {
-                      if (mark.type === 'bold') {
-                          text = `<b>${text}</b>`;
-                      }
-                      // Add other mark types if needed (italic, underline, etc.)
-                  });
-              }
-              html += text;
-          });
-          html += '</p>';
-        }
+          if (item.content) {
+              html += '<p>';
+              item.content.forEach((contentItem: any) => {
+                  let text = contentItem.text;
+                  if (contentItem.marks) {
+                      contentItem.marks.forEach((mark: any) => {
+                          if (mark.type === 'bold') {
+                              text = `<b>${text}</b>`;
+                          }
+                          // Add other mark types if needed (italic, underline, etc.)
+                      });
+                  }
+                  html += text;
+              });
+              html += '</p>';
+          }
       } else {
           console.log('Unknown type: ', item.type);
       }
@@ -167,7 +170,6 @@ function renderRichText(richText: any) {
 
   return html;
 }
-
 export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
   if (!story) {
     return <div><span>Loading...</span></div>;
@@ -258,14 +260,10 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
     }
   `;
 
-  const topSlotContent = renderRichText(story.content.topSlot);
-  const promotionContent = renderRichText(story.content.promotionContent);
-  const bottomSlotContent = renderRichText(story.content.bottomSlot);
-
   // top slot
   if (slot === 'top') {
     return (
-      <div dangerouslySetInnerHTML={{ __html: topSlotContent}}>
+      <div dangerouslySetInnerHTML={{ __html: renderRichText(story.content.topSlot)}}>
         <style>{styles}</style>
       </div>
     ) 
@@ -273,7 +271,7 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
   // bottom slot
   else if (slot === 'bottom') {
     return (
-      <div dangerouslySetInnerHTML={{ __html: bottomSlotContent}}>
+      <div dangerouslySetInnerHTML={{ __html: renderRichText(story.content.bottomSlot)}}>
         <style>{styles}</style>
       </div>
     )
@@ -294,7 +292,7 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
     return (
       <div className="lcep-promotion" style={{backgroundImage: `url(${story.content?.promotionImage.filename})`}}>
         <style>{styles}</style>
-        <span dangerouslySetInnerHTML={{ __html: (promotionContent) }}></span>
+        <span dangerouslySetInnerHTML={{ __html: renderRichText(story.content.promotionContent) }}></span>
         <a href={story.content.promotionLink.url}>
           Learn more
         </a>
