@@ -1,13 +1,4 @@
 import * as React from 'react';
-import { renderRichText, storyblokInit, apiPlugin, ISbRichtext } from "@storyblok/react";
-
-storyblokInit({
-  accessToken: "osl4HoQDQfrBYAqRA1nfrQtt", // throwaway token
-  apiOptions: {
-    region: "us",
-  },
-  use: [apiPlugin]
-});
 
 /*
 Create video showing how to use the SB component
@@ -28,7 +19,7 @@ type SBProps = {
     content: {
       _uid: string;
       network: string[];
-      promotionContent: ISbRichtext;
+      promotionContent: any;
       promotionLink: {
         id: string;
         url: string;
@@ -52,9 +43,9 @@ type SBProps = {
         is_external_url: boolean;
     };    
       subType: string;
-      topSlot: ISbRichtext;
+      topSlot: any;
       component: string;
-      bottomSlot: ISbRichtext;
+      bottomSlot: any;
       defaultSKU: string;
       familyCode: string;
       familyName: string;
@@ -141,6 +132,34 @@ type SBProps = {
   };
 }
 
+function renderRichText(richText: any) {
+  let html = '';
+
+  richText.content.forEach((item: any) => {
+      if (item.type === 'heading') {
+          const level = item.attrs.level;
+          html += `<h${level}>${item.content[0].text}</h${level}>`;
+      } else if (item.type === 'paragraph') {
+          html += '<p>';
+          item.content.forEach((contentItem: any) => {
+              let text = contentItem.text;
+              if (contentItem.marks) {
+                  contentItem.marks.forEach((mark: any) => {
+                      if (mark.type === 'bold') {
+                          text = `<b>${text}</b>`;
+                      }
+                      // Add other mark types if needed (italic, underline, etc.)
+                  });
+              }
+              html += text;
+          });
+          html += '</p>'; 
+      }
+  });
+
+  return html;
+}
+
 export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
   if (!story) {
     return <div><span>Loading...</span></div>;
@@ -181,9 +200,11 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
     /* Promotion Component */
     .lcep-promotion {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: end;
+      justify-content: center;
       width: 100%;
+      height:400px;
       max-width: 200px;
       margin: 0 auto;
       padding: 2rem 1rem;
@@ -193,6 +214,8 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
       background-position: center;
       background-repeat: no-repeat;
       color: #fff;
+      border-radius: 12px;
+      overflow: hidden;
     }
 
     .lcep-promotion:after{
@@ -206,6 +229,25 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
       left: 0px;
       background-color: rgba(0,0,0,0.5);
     }
+
+    .lcep-promotion a,
+    .lcep-promotion span {
+      position: relative;
+      z-index: 3;
+      display: block;
+      width: 100%;
+      padding: 15px;
+    }
+
+    .lcep-promotion a {
+      background-color: #fff;
+      color: #000;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 12px;
+      margin-top: 1rem;
+      padding: 1rem;
+    }
   `;
 
   const topSlotContent = renderRichText(story.content.topSlot);
@@ -215,18 +257,16 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
   // top slot
   if (slot === 'top') {
     return (
-      <div>
+      <div dangerouslySetInnerHTML={{ __html: topSlotContent}}>
         <style>{styles}</style>
-        {topSlotContent}
       </div>
     ) 
   }
   // bottom slot
   else if (slot === 'bottom') {
     return (
-      <div>
+      <div dangerouslySetInnerHTML={{ __html: bottomSlotContent}}>
         <style>{styles}</style>
-        {bottomSlotContent}
       </div>
     )
   }
@@ -236,7 +276,7 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
       <div className="lcep-video">
         <style>{styles}</style>
         <video controls>
-          <source src={story.content.productVideos[0].source} type="video/mp4" />
+          <source src={story.content.productVideos[0].filename} type="video/mp4" />
         </video>
       </div>
     )
@@ -246,7 +286,7 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
     return (
       <div className="lcep-promotion" style={{backgroundImage: `url(${story.content?.promotionImage.filename})`}}>
         <style>{styles}</style>
-        {promotionContent}
+        <span dangerouslySetInnerHTML={{ __html: (promotionContent) }}></span>
         <a href={story.content.promotionLink.url}>
           Learn more
         </a>

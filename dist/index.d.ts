@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ISbRichtext } from "@storyblok/react";
 declare type SBProps = {
     slot?: 'top' | 'bottom' | 'promotion' | 'video';
     story: {
@@ -11,7 +10,7 @@ declare type SBProps = {
         content: {
             _uid: string;
             network: string[];
-            promotionContent: ISbRichtext;
+            promotionContent: any;
             promotionLink: {
                 id: string;
                 url: string;
@@ -35,9 +34,9 @@ declare type SBProps = {
                 is_external_url: boolean;
             };
             subType: string;
-            topSlot: ISbRichtext;
+            topSlot: any;
             component: string;
-            bottomSlot: ISbRichtext;
+            bottomSlot: any;
             defaultSKU: string;
             familyCode: string;
             familyName: string;
