@@ -10,7 +10,14 @@ npm i lcep-storyblok-component
 import SBcomponent from 'lcep-storyblok-component'
 
 // use the component
-<SBComponent slot='top' story={story} />
+// Top slot component: Rich Text
+<SBcomponent slot={'top'} story={story} />
+// Promotional Component
+<SBcomponent slot={'promotion'} story={story} />
+// MP4 embed
+<SBcomponent slot={'video'} story={story} />
+// Bottom Slot: Rich Text
+<SBcomponent slot={'bottom'} story={story} />
 ```
 
 ===

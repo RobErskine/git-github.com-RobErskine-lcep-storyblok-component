@@ -186,7 +186,7 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
     }
 
     .lcep-video video {
-      height: 100%;
+      width: 100%;
     }
 
     .lcep-promotion {
@@ -209,7 +209,7 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
       overflow: hidden;
     }
 
-    .lcep-promotion:after{
+    .lcep-promotion .background{
       display: block;
       z-index: 2;
       position: absolute;
@@ -282,6 +282,7 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
         <a href={story.content.promotionLink.url}>
           Learn more
         </a>
+        <div className="background"></div>
       </div>
     );
   // slot not found
