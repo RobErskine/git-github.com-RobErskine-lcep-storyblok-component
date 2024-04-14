@@ -185,23 +185,7 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
       position: relative;
     }
 
-    .lcep-video:after {
-      content: '';
-      display: block;
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-    }
-
     .lcep-video video {
-      position: absolute;
-      top: 0px;
-      right: 0px;
-
-      bottom: 0px;
-      left: 0px;
-      width: 100%;
       height: 100%;
     }
 
@@ -227,7 +211,6 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
 
     .lcep-promotion:after{
       display: block;
-      content: '';
       z-index: 2;
       position: absolute;
       top: 0px;
@@ -244,6 +227,10 @@ export default ({ slot = 'top', story }: SBProps): React.ReactElement => {
       display: block;
       width: 100%;
       padding: 15px;
+    }
+
+    .lcep-promotion span {
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.33);
     }
 
     .lcep-promotion a {
